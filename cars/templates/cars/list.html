@@ -7,6 +7,9 @@
     <title>Document</title>
 </head>
 <body>
+    {% for message in messages %}
+        {{message}}
+    {% endfor %}
     <h1>Car Brands</h1>
         {% for brand in brands %}
             {{ brand }}
