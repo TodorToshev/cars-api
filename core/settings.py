@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'accounts',
     'api',
     'rest_framework',
+    'django_filters',
     
     'django.contrib.admin',
     'django.contrib.auth',
@@ -135,3 +136,9 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 
 LOGIN_REDIRECT_URL = reverse_lazy('cars:all')
 LOGOUT_REDIRECT_URL = reverse_lazy('cars:all')
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ),
+}
