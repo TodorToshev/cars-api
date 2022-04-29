@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 import os
 
+from django.urls import reverse_lazy
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -35,6 +37,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'cars',
     'accounts',
+    'api',
+    'rest_framework',
     
     'django.contrib.admin',
     'django.contrib.auth',
@@ -128,3 +132,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
+LOGIN_REDIRECT_URL = reverse_lazy('cars:all')
+LOGOUT_REDIRECT_URL = reverse_lazy('cars:all')

@@ -26,7 +26,7 @@ class UserCar(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     car_brand = models.ForeignKey(CarBrand, on_delete=models.CASCADE)
     car_model = models.ForeignKey(CarModel, on_delete=models.CASCADE)
-    first_reg = models.DateField()
+    first_reg = models.DateField(null=True)
     odometer = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     deleted_at = models.DateTimeField(auto_now=True)    #soft_delete. change later.

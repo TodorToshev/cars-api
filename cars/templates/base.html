@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li {
+            list-style-type: none;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header style="display:flex; justify-content: center; align-items: center;">
+        <ul>
+        {% if user.is_authenticated %}
+            <li>                
+                <a href="{% url 'accounts:logout' %}">Log out</a>
+            </li>
+        {% else %}
+            <li>                
+                <a href="{% url 'accounts:login' %}">Log in/Register</a>
+            </li>
+        {% endif %}
+        </ul>
+        <li>                
+            <a href="{% url 'accounts:logout' %}">API</a>
+        </li>
+      </header>
+
+      {% block content %}
+      
+      {% endblock %}
+    
+</body>
+</html>
