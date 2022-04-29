@@ -5,8 +5,7 @@ from cars.models import CarBrand, CarModel, UserCar
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
-        exclude = ('user_permissions', 'password', 'is_staff', 'groups',)
-        fields = ('')
+        exclude = ('password', 'deleted_at', 'groups','user_permissions', )
 
 
 class CarBrandSerializer(serializers.HyperlinkedModelSerializer):
