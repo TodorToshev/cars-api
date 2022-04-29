@@ -1,8 +1,8 @@
 from rest_framework import viewsets
 from rest_framework import permissions
 from django_filters import rest_framework as filters
-from .serializers import (UserSerializer, CarBrandSerializer, 
-    CarModelSerializer, UserCarSerializer)
+from .serializers import (UserSerializer, CarBrandSerializer,
+                          CarModelSerializer, UserCarSerializer)
 from accounts.models import CustomUser
 from cars.models import CarBrand, CarModel, UserCar
 
@@ -10,25 +10,59 @@ from cars.models import CarBrand, CarModel, UserCar
 class UserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
-    
+
+
+class CarBrandFilter(filters.FilterSet):
+
+    class Meta:
+        model = CarBrand
+        fields = {
+            'name': ['icontains'],
+            'created_at': ['iexact', 'lte', 'gte'],
+            'deleted_at': ['iexact', 'lte', 'gte'],
+        }
+
+
+class CarModelFilter(filters.FilterSet):
+
+    class Meta:
+        model = CarModel
+        fields = {
+            'car_brand': ['exact'],
+            'name': ['icontains'],
+            'created_at': ['iexact', 'lte', 'gte'],
+            'update_at': ['iexact', 'lte', 'gte'],
+        }
+
+
+class UserCarFilter(filters.FilterSet):
+
+    class Meta:
+        model = UserCar
+        fields = {
+            'user': ['exact'],
+            'car_brand': ['exact'],
+            'car_model': ['exact'],
+            'first_reg': ['iexact', 'lte', 'gte'],
+            'odometer': ['iexact', 'lte', 'gte'],
+            'created_at': ['iexact', 'lte', 'gte'],
+            'deleted_at': ['iexact', 'lte', 'gte'],
+        }
+
 
 class CarBrandViewSet(viewsets.ModelViewSet):
     queryset = CarBrand.objects.all()
     serializer_class = CarBrandSerializer
-    filter_backends = (filters.DjangoFilterBackend,)
-    filterset_fields = '__all__'
-    # filterset_fields = ('name', 'created_at', 'deleted_at')
+    filterset_class = CarBrandFilter
 
 
 class CarModelViewSet(viewsets.ModelViewSet):
     queryset = CarModel.objects.all()
     serializer_class = CarModelSerializer
-    filter_backends = (filters.DjangoFilterBackend,)
-    filterset_fields = '__all__'
+    filterset_class = CarModelFilter
 
 
 class UserCarViewSet(viewsets.ModelViewSet):
     queryset = UserCar.objects.all()
     serializer_class = UserCarSerializer
-    filter_backends = (filters.DjangoFilterBackend,)
-    filterset_fields = '__all__'
+    filterset_class = UserCarFilter
