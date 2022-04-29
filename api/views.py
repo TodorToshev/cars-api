@@ -1,5 +1,4 @@
-from rest_framework import viewsets
-from rest_framework import permissions
+from rest_framework import viewsets, mixins
 from django_filters import rest_framework as filters
 from .serializers import (UserSerializer, CarBrandSerializer,
                           CarModelSerializer, UserCarSerializer)
@@ -7,7 +6,9 @@ from accounts.models import CustomUser
 from cars.models import CarBrand, CarModel, UserCar
 
 
-class UserViewSet(viewsets.ModelViewSet):
+class UserViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+    ''' inherit from mixins.ListModelMixin, viewsets.GenericViewSet in
+    order to be able to list the view in the API root. '''
     queryset = CustomUser.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
 
@@ -18,8 +19,8 @@ class CarBrandFilter(filters.FilterSet):
         model = CarBrand
         fields = {
             'name': ['icontains'],
-            'created_at': ['iexact', 'lte', 'gte'],
-            'deleted_at': ['iexact', 'lte', 'gte'],
+            # 'created_at': ['iexact', 'lte', 'gte'],
+            # 'deleted_at': ['iexact', 'lte', 'gte'],
         }
 
 
@@ -30,7 +31,7 @@ class CarModelFilter(filters.FilterSet):
         fields = {
             'car_brand': ['exact'],
             'name': ['icontains'],
-            'created_at': ['iexact', 'lte', 'gte'],
+            # 'created_at': ['iexact', 'lte', 'gte'],
             'update_at': ['iexact', 'lte', 'gte'],
         }
 
@@ -45,8 +46,8 @@ class UserCarFilter(filters.FilterSet):
             'car_model': ['exact'],
             'first_reg': ['iexact', 'lte', 'gte'],
             'odometer': ['iexact', 'lte', 'gte'],
-            'created_at': ['iexact', 'lte', 'gte'],
-            'deleted_at': ['iexact', 'lte', 'gte'],
+            # 'created_at': ['iexact', 'lte', 'gte'],
+            # 'deleted_at': ['iexact', 'lte', 'gte'],
         }
 
 
