@@ -13,8 +13,7 @@
     </style>
 </head>
 <body>
-    <header style="display:flex; justify-content: center; align-items: center;">
-        <ul>
+    <header style="display:flex; justify-content: center; align-items: center; text-align: center;">
         {% if user.is_authenticated %}
             <li>                
                 <a href="{% url 'accounts:logout' %}">Log out</a>
@@ -24,15 +23,16 @@
                 <a href="{% url 'accounts:login' %}">Log in/Register</a>
             </li>
         {% endif %}
-        </ul>
         <li>                
             <a href="{% url 'accounts:logout' %}">API</a>
         </li>
-      </header>
+    </header>
 
-      {% block content %}
+    <div style="text-align: center; margin-top: 5%;">
+        {% block content %}
       
-      {% endblock %}
+        {% endblock %}
+    </div>
     
 </body>
 </html>

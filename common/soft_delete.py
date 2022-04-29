@@ -10,7 +10,7 @@ class SoftDeleteManager(models.Manager):
 class SoftDeleteModel(models.Model):
     deleted_at = models.DateTimeField(blank=True, null=True, default=None)
     objects = SoftDeleteManager()
-    all_objects = models.Manager()  # see docs! class EmptyManager??
+    all_objects = models.Manager()
 
     class Meta:
         abstract = True
@@ -23,5 +23,5 @@ class SoftDeleteModel(models.Model):
             self.save()
 
     def restore(self):
-      self.deleted_at = None  # None == Null in the DB?
+      self.deleted_at = None
       self.save()

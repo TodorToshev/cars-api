@@ -13,62 +13,59 @@ def list_all(request):
 
 class CarBrandCreateView(CreateView):
     model = CarBrand
-    fields = '__all__'
+    fields = ('name',)
     template_name = 'cars/create.html'
     success_url = reverse_lazy('cars:all')
 
 
 class CarBrandUpdateView(UpdateView):
     model = CarBrand
-    fields = '__all__'
+    fields = ('name',)
     template_name = 'cars/create.html'
     success_url = reverse_lazy('cars:all')
 
 
 class CarBrandDeleteView(DeleteView):
     model = CarBrand
-    fields = '__all__'
     template_name = 'cars/delete.html'
     success_url = reverse_lazy('cars:all')
 
 
 class CarModelCreateView(CreateView):
     model = CarModel
-    fields = '__all__'
+    fields = ('car_brand', 'name',)
     template_name = 'cars/create.html'
     success_url = reverse_lazy('cars:all')
 
 
 class CarModelUpdateView(UpdateView):
     model = CarModel
-    fields = '__all__'
+    fields = ('car_brand', 'name',)
     template_name = 'cars/create.html'
     success_url = reverse_lazy('cars:all')
 
 
 class CarModelDeleteView(DeleteView):
     model = CarModel
-    fields = '__all__'
     template_name = 'cars/delete.html'
     success_url = reverse_lazy('cars:all')
 
 
 class UserCarCreateView(CreateView):
     model = UserCar
-    fields = '__all__'
+    fields = ('user', 'car_brand', 'car_model', 'first_reg', 'odometer',)
     template_name = 'cars/create.html'
     success_url = reverse_lazy('cars:all')
 
 
 class UserCarUpdateView(UpdateView):
     model = UserCar
-    fields = '__all__'
+    fields = ('user', 'car_brand', 'car_model', 'first_reg', 'odometer',)
     template_name = 'cars/create.html'
     success_url = reverse_lazy('cars:all')
 
 
 class UserCarDeleteView(DeleteView):
     model = UserCar
-    fields = '__all__'
     template_name = 'cars/delete.html'
     success_url = reverse_lazy('cars:all')
