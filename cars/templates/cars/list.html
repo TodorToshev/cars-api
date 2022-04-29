@@ -7,13 +7,24 @@
         <h1>Car Brands</h1>
             {% for brand in brands %}
                 {{ brand }}
+                <a href="{% url 'cars:brand_update' brand.pk %}">Edit</a>
+                <a href="{% url 'cars:brand_delete' brand.pk %}">Delete</a>
+                <br>
             {% endfor %}
         <h1>Car Models</h1>
             {% for model in models %}
                 {{ model }}
+                <a href="{% url 'cars:model_update' model.pk %}">Edit</a>
+                <a href="{% url 'cars:model_delete' model.pk %}">Delete</a>
+                <br>
             {% endfor %}
         <h1>User Cars</h1>
             {% for user_car in user_cars %}
                 {{ user_car }}
+                {% if request.user.is_authenticated and request.user == user_car.user %}
+                    <a href="{% url 'cars:user_car_update' user_car.pk %}">Edit</a>
+                    <a href="{% url 'cars:user_car_delete' user_car.pk %}">Delete</a>
+                {% endif %}
+                <br>
             {% endfor %}
     {% endblock %}

@@ -24,6 +24,12 @@
             </li>
         {% endif %}
         <li>                
+            <a href="{% url 'cars:brand_create' %}">Create Brand</a>
+        </li>
+        <li>                
+            <a href="{% url 'cars:model_create' %}">Create Model</a>
+        </li>
+        <li>                
             <a href="{% url 'accounts:logout' %}">API</a>
         </li>
     </header>
