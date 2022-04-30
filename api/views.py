@@ -6,9 +6,7 @@ from accounts.models import CustomUser
 from cars.models import CarBrand, CarModel, UserCar
 
 
-class UserViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
-    # inherit from mixins.ListModelMixin, viewsets.GenericViewSet in
-    # order to be able to list the view in the API root.
+class UserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
 
