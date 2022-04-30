@@ -1,4 +1,4 @@
-from rest_framework import viewsets, mixins
+from rest_framework import viewsets
 from django_filters import rest_framework as filters
 from .serializers import (UserSerializer, CarBrandSerializer,
                           CarModelSerializer, UserCarSerializer)
@@ -7,8 +7,11 @@ from cars.models import CarBrand, CarModel, UserCar
 
 
 class UserViewSet(viewsets.ModelViewSet):
+    SAFE_METHODS = ['get', 'head', 'options']
+
     queryset = CustomUser.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
+    http_method_names = SAFE_METHODS
 
 
 class CarBrandFilter(filters.FilterSet):
@@ -65,3 +68,4 @@ class UserCarViewSet(viewsets.ModelViewSet):
     queryset = UserCar.objects.all()
     serializer_class = UserCarSerializer
     filterset_class = UserCarFilter
+    
